@@ -3,7 +3,7 @@
 [build]
   base    = ""
   publish = "build/"
-  command = "npm run build"
+  command = "if [ $IGNORE_WARNING ]; then npm run build; else npm run build-with-warnings; fi"
 
 [[redirects]]
   from = "/*"
