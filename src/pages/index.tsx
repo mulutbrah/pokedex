@@ -6,6 +6,7 @@ import Card from '../components/Card';
 import { capitalize } from '../utils/helpers';
 
 interface TPokemonDetail {
+  id: number;
   sprites: {
     front_default: string
   };
@@ -17,6 +18,7 @@ interface TPokemonDetail {
 const DashboardPage: React.FC = () => {
   const [pokemonList, setPokemonList] = useState<any[]>([]);
   const [pokemonSelected, setPokemonSelected] = useState<TPokemonDetail>({
+    id: 0,
     sprites: {
       front_default: ''
     },

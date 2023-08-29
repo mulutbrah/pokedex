@@ -1,10 +1,12 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
-import "./style.scss";
 import Tag from "../Tag";
 import { capitalize } from "../../utils/helpers";
 
+import "./style.scss";
 interface TPokemonDetail {
+  id: number;
   sprites: {
     front_default: string
   };
@@ -35,7 +37,7 @@ const Card: React.FC<ICard> = ({ pokemon, className }) => {
         <img src={pokemon.sprites.front_default} className="m-auto" alt="pokemon" />
       </div>
 
-      <div>
+      <div className="mb-6">
         <p className="text-lg text-slate-950">Moves</p>
         
         <div className="pokemon-card__moves grid grid-cols-3 gap-1">
@@ -44,6 +46,12 @@ const Card: React.FC<ICard> = ({ pokemon, className }) => {
           ))}
         </div>
       </div>
+
+      <Link to={`/pokemon/${pokemon.id}`}>
+        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+          Detail
+        </button>
+      </Link>
     </div>
   );
 };
