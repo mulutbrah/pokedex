@@ -27,9 +27,15 @@ const DashboardPage: React.FC = () => {
     moves: [],
   });
   const [loading, setLoading] = useState(true);
+  const [isPokemonSelected, setIsPokemonSelected] = useState(false);
 
   const handleDetail = (pokemon: any) => {
     setPokemonSelected(pokemon)
+    setIsPokemonSelected(true)
+  }
+
+  const handleShowMore = () => {
+    fetch();
   }
 
   const fetch = async () => {
@@ -39,8 +45,10 @@ const DashboardPage: React.FC = () => {
       if(res.results.length >0) {
         res.results.forEach(async (pokemon: any) => {
           const results = await getOne(pokemon.url);
-
-          setPokemonList((prevState) => [...prevState, results]);
+          
+          if (!pokemonList.includes(results)) {
+            setPokemonList((prevState) => [...prevState, results]);
+          }
         });
       }
     }catch {
@@ -56,24 +64,33 @@ const DashboardPage: React.FC = () => {
 
   return (
     <div className="container m-auto grid sm:grid-cols-1 md:grid-cols-2 gap-2">
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
-        {!loading && pokemonList.length > 0 && pokemonList.map(pokemon => (
-          <div onClick={() => handleDetail(pokemon)}>
-            <img className='card__image' width={120} height={120} src={pokemon.sprites['front_default']} alt="" loading='lazy'/>
+      <div>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
+          {!loading && pokemonList.length > 0 && pokemonList.map(pokemon => (
+            <div onClick={() => handleDetail(pokemon)}>
+              <img className='card__image' width={120} height={120} src={pokemon.sprites['front_default']} alt="" loading='lazy'/>
 
-            <h3 className='card__name'>{capitalize(pokemon.name)}</h3>
-            
-            <div className='flex'>
-              {pokemon.types && pokemon.types.map((item: { type: any }) => (
-                <Tag className="mr-2" text={item.type.name} />
-              ))}
+              <h3 className='card__name'>{capitalize(pokemon.name)}</h3>
+              
+              <div className='flex'>
+                {pokemon.types && pokemon.types.map((item: { type: any }) => (
+                  <Tag className="mr-2" text={item.type.name} />
+                ))}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
+        
+
+        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-10" onClick={handleShowMore}>
+          Show More
+        </button>
       </div>
 
       <div className='bg-slate-300'>
-        <Card className='mt-20' showButton pokemon={pokemonSelected} />
+        {isPokemonSelected && (
+          <Card className='mt-20' showButton pokemon={pokemonSelected} />
+        )}
       </div>
     </div>
   );
