@@ -67,7 +67,7 @@ const DashboardPage: React.FC = () => {
       <div>
         <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-2">
           {!loading && pokemonList.length > 0 && pokemonList.map(pokemon => (
-            <div onClick={() => handleDetail(pokemon)}>
+            <div className='cursor-pointer hover:bg-slate-100 p-4 text-center m-auto rounded' onClick={() => handleDetail(pokemon)}>
               <img className='card__image' width={120} height={120} src={pokemon.sprites['front_default']} alt="" loading='lazy'/>
 
               <h3 className='card__name'>{capitalize(pokemon.name)}</h3>
@@ -89,7 +89,7 @@ const DashboardPage: React.FC = () => {
 
       <div className='bg-slate-300'>
         {isPokemonSelected && (
-          <Card className='mt-20' showButton pokemon={pokemonSelected} />
+          <Card className='mt-20' showButton showMoves pokemon={pokemonSelected} />
         )}
       </div>
     </div>

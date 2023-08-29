@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { getOne } from '../api/pokemon';
 import Card from '../components/Card';
+import Tag from '../components/Tag';
 
 interface TPokemonDetail {
     id: number;
@@ -59,19 +60,30 @@ const PokemonDetail: React.FC = () => {
             <Card pokemon={pokemonDetail} />
 
             <div>
-                <div>
-                    <p className='text-lg font-semibold'>Base Experience</p>
-                    <p className='text-slate-900'>{pokemonDetail.base_experience}</p>
+                <div className='grid grid-cols-3'>
+                    <div>
+                        <p className='text-lg font-semibold'>Base Experience</p>
+                        <p className='text-slate-900'>{pokemonDetail.base_experience}</p>
+                    </div>
+
+                    <div>
+                        <p className='text-lg font-semibold'>Height</p>
+                        <p className='text-slate-900'>{pokemonDetail.height}</p>
+                    </div>
+
+                    <div>
+                        <p className='text-lg font-semibold'>Weight</p>
+                        <p className='text-slate-900'>{pokemonDetail.weight}</p>
+                    </div>
                 </div>
 
-                <div className='my-4'>
-                    <p className='text-lg font-semibold'>Height</p>
-                    <p className='text-slate-900'>{pokemonDetail.height}</p>
-                </div>
-
-                <div>
-                    <p className='text-lg font-semibold'>Weight</p>
-                    <p className='text-slate-900'>{pokemonDetail.weight}</p>
+                <div className='mt-4'>
+                    <p className="text-lg text-slate-950 font-semibold">Moves</p>
+                    <div className="grid grid-cols-3 gap-1">
+                    {pokemonDetail.moves && pokemonDetail.moves.map((item: { move: any }) => (
+                        <Tag className="mr-2" text={item.move.name} />
+                    ))}
+                    </div>
                 </div>
             </div>
         </div>

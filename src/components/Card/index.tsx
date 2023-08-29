@@ -19,9 +19,10 @@ interface ICard {
   className?: string;
   pokemon: TPokemonDetail;
   showButton?: boolean;
+  showMoves?: boolean;
 }
 
-const Card: React.FC<ICard> = ({ pokemon, className, showButton }) => {
+const Card: React.FC<ICard> = ({ pokemon, className, showButton, showMoves }) => {
   return (
     <div className={`pokemon-card ${className} m-auto sticky top-0`}>
       <div className="flex justify-between items-center">
@@ -39,13 +40,19 @@ const Card: React.FC<ICard> = ({ pokemon, className, showButton }) => {
       </div>
 
       <div className="mb-6">
-        <p className="text-lg text-slate-950">Moves</p>
         
-        <div className="pokemon-card__moves grid grid-cols-3 gap-1">
-          {pokemon.moves && pokemon.moves.map((item: { move: any }) => (
-            <Tag className="mr-2" text={item.move.name} />
-          ))}
-        </div>
+        
+        {
+          showMoves && 
+          <>
+            <p className="text-lg text-slate-950">Moves</p>
+            <div className="pokemon-card__moves grid grid-cols-3 gap-1">
+              {pokemon.moves && pokemon.moves.map((item: { move: any }) => (
+                <Tag className="mr-2" text={item.move.name} />
+              ))}
+            </div>
+          </>
+        }
       </div>
 
       {
