@@ -24,7 +24,7 @@ interface ICard {
 
 const Card: React.FC<ICard> = ({ pokemon, className, showButton, showMoves }) => {
   return (
-    <div className={`pokemon-card ${className} m-auto sticky top-0`}>
+    <div className={`pokemon-card ${className} m-auto`}>
       <div className="flex justify-between items-center">
         <p className="text-2xl text-slate-950">{ capitalize(pokemon.name) }</p>
 
@@ -36,7 +36,7 @@ const Card: React.FC<ICard> = ({ pokemon, className, showButton, showMoves }) =>
       </div>
 
       <div className="text-center pokemon-card__image">
-        <img src={pokemon.sprites.front_default} className="m-auto" alt="pokemon" />
+        <img src={pokemon?.sprites?.front_default} className="m-auto" alt="pokemon" />
       </div>
 
       <div className="mb-6">
