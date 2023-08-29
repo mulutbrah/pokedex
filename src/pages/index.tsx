@@ -24,9 +24,8 @@ const DashboardPage: React.FC = () => {
     },
     name: '',
     types: [],
-    moves: []
+    moves: [],
   });
-  console.log(pokemonSelected);
   const [loading, setLoading] = useState(true);
 
   const handleDetail = (pokemon: any) => {
@@ -74,7 +73,7 @@ const DashboardPage: React.FC = () => {
       </div>
 
       <div className='bg-slate-300'>
-        <Card className='mt-20' pokemon={pokemonSelected} />
+        <Card className='mt-20' showButton pokemon={pokemonSelected} />
       </div>
     </div>
   );

@@ -18,9 +18,10 @@ interface TPokemonDetail {
 interface ICard {
   className?: string;
   pokemon: TPokemonDetail;
+  showButton?: boolean;
 }
 
-const Card: React.FC<ICard> = ({ pokemon, className }) => {
+const Card: React.FC<ICard> = ({ pokemon, className, showButton }) => {
   return (
     <div className={`pokemon-card ${className} m-auto sticky top-0`}>
       <div className="flex justify-between items-center">
@@ -47,11 +48,15 @@ const Card: React.FC<ICard> = ({ pokemon, className }) => {
         </div>
       </div>
 
-      <Link to={`/pokemon/${pokemon.id}`}>
-        <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-          Detail
-        </button>
-      </Link>
+      {
+        showButton && 
+        <Link to={`/pokemon/${pokemon.id}`}>
+          <button className="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Detail
+          </button>
+        </Link>
+      }
+      
     </div>
   );
 };
