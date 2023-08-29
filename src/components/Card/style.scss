@@ -1,0 +1,21 @@
+.pokemon-card {
+  color: #bdbdbd;
+  background-color: rgba(255,255,255);
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 350px;
+
+  &__image {
+    margin: 0 auto;
+    width: 250px;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  &__moves {
+    height: 100px;
+    overflow-y: scroll;
+  }
+}

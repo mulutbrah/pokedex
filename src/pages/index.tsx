@@ -2,11 +2,16 @@ import React, { useEffect, useState } from 'react';
 
 import { get, getOne } from '../api/pokemon';
 import Tag from '../components/Tag';
+import Card from '../components/Card';
+import { capitalize } from '../utils/helpers';
 
 interface TPokemonDetail {
   sprites: {
     front_default: string
-  }
+  };
+  name: string;
+  types: Array<any>;
+  moves: Array<any>;
 }
 
 const DashboardPage: React.FC = () => {
@@ -14,7 +19,10 @@ const DashboardPage: React.FC = () => {
   const [pokemonSelected, setPokemonSelected] = useState<TPokemonDetail>({
     sprites: {
       front_default: ''
-    }
+    },
+    name: '',
+    types: [],
+    moves: []
   });
   console.log(pokemonSelected);
   const [loading, setLoading] = useState(true);
@@ -52,9 +60,7 @@ const DashboardPage: React.FC = () => {
           <div onClick={() => handleDetail(pokemon)}>
             <img className='card__image' width={120} height={120} src={pokemon.sprites['front_default']} alt="" loading='lazy'/>
 
-            <h4>{pokemon.order}</h4>
-
-            <h3 className='card__name'>{pokemon.name.charAt(0).toUpperCase()+ pokemon.name.slice(1)}</h3>
+            <h3 className='card__name'>{capitalize(pokemon.name)}</h3>
             
             <div className='flex'>
               {pokemon.types && pokemon.types.map((item: { type: any }) => (
@@ -65,9 +71,8 @@ const DashboardPage: React.FC = () => {
         ))}
       </div>
 
-      <div>
-        <img src={pokemonSelected.sprites.front_default} />
-        DETAIL
+      <div className='bg-slate-300'>
+        <Card className='mt-20' pokemon={pokemonSelected} />
       </div>
     </div>
   );

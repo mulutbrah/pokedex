@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./style.scss";
+import { capitalize } from "../../utils/helpers";
 
 interface ITag {
   text: string;
@@ -10,7 +11,7 @@ interface ITag {
 const Tag: React.FC<ITag> = ({ text, className }) => {
   return (
     <div className={`tag ${className}`}>
-      { text }
+      { capitalize(text) }
     </div>
   );
 };
